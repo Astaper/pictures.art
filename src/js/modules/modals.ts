@@ -82,23 +82,6 @@ const modals = () => {
         modalSelector: '.popup',
         closeSelector:'.popup .popup_close'
     });
-    triggers({
-        triggerSelector: '.popup_calc_btn',
-        modalSelector: '.popup_calc',
-        closeSelector: '.popup_calc_close'
-    });
-    triggers({
-        triggerSelector: '.popup_calc_button',
-        modalSelector: '.popup_calc_profile',
-        closeSelector: '.popup_calc_profile_close',
-        closeClickOverlay: false
-    });
-    triggers({
-        triggerSelector: '.popup_calc_profile_button',
-        modalSelector: '.popup_calc_end',
-        closeSelector: '.popup_calc_end_close',
-        closeClickOverlay: false
-    });
-};
+    
 
 export default modals;
