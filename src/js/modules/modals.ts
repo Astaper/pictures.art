@@ -15,20 +15,15 @@ const modals = () => {
         const scroll = calcScroll();
 
         trigger.forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
+            trigger.addEventListener('click', (e: Event) => {
                 if (e.target) {
                     e.preventDefault();
                 }
 
-                // windows.forEach(window) => {
-                //     window.style.display = 'none';
-                // });
+                windows.forEach(window => {
+                    (window as HTMLElement).style.display = 'none';
+                });
 
-                windows.forEach((window) => {
-                    if (window instanceof HTMLElement) {
-                      window.style.display = 'none';
-                    }
-                  });
 
                 modal!.style.display = "block";
                 document.body.style.overflow = "hidden";
@@ -36,7 +31,7 @@ const modals = () => {
             });
         });
 
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 closeModal();
             }
@@ -47,7 +42,7 @@ const modals = () => {
             document.body.style.overflow = "";
 
             windows.forEach(window => {
-                window.style.display = 'none';
+                (window as HTMLElement).style.display = 'none';
             });
         }
 
