@@ -1,3 +1,11 @@
+interface ModalOptions {
+    triggerSelector: string;
+    modalSelector: string;
+    closeSelector: string;
+    closeClickOverlay?: boolean;
+}
+
+
 const modals = () => {
     const triggers = ({triggerSelector, modalSelector, closeSelector, closeClickOverlay = true}) => {
         const trigger = document.querySelectorAll(triggerSelector);
