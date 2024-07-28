@@ -1,4 +1,4 @@
-interface ModalOptions {
+interface IModalOptions {
     triggerSelector: string;
     modalSelector: string;
     closeSelector: string;
@@ -8,7 +8,7 @@ interface ModalOptions {
 
 const modals = () => {
     btnPressed: false;
-    const triggers = ({ triggerSelector, modalSelector, closeSelector, destroy = false }: ModalOptions) => {
+    const triggers = ({ triggerSelector, modalSelector, closeSelector, destroy = false }: IModalOptions) => {
         const trigger = document.querySelectorAll<HTMLElement>(triggerSelector);
         const modal = document.querySelector<HTMLElement>(modalSelector);
         const close = document.querySelector<HTMLElement>(closeSelector);
