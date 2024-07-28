@@ -1,48 +1,57 @@
+interface ModalOptions { 
+    triggerSelector: string;
+    modalSelector: string;
+    closeSelector: string;
+    closeClickOverlay?: boolean;
+}
+
+
 const modals = () => {
-    const triggers = ({triggerSelector, modalSelector, closeSelector, closeClickOverlay = true}) => {
-        const trigger = document.querySelectorAll(triggerSelector);
-        const modal = document.querySelector(modalSelector);
-        const close = document.querySelector(closeSelector);
-        const windows = document.querySelectorAll('[data-modal]');
-        scroll = calcScroll();
+    const triggers = ({ triggerSelector, modalSelector, closeSelector, closeClickOverlay = true }: ModalOptions) => {
+        const trigger = document.querySelectorAll<HTMLElement>(triggerSelector);
+        const modal = document.querySelector<HTMLElement>(modalSelector);
+        const close = document.querySelector<HTMLElement>(closeSelector);
+        const windows = document.querySelectorAll<HTMLElement>('[data-modal]');
+        const scroll = calcScroll();
 
         trigger.forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
+            trigger.addEventListener('click', (e: Event) => {
                 if (e.target) {
                     e.preventDefault();
                 }
 
                 windows.forEach(window => {
-                    window.style.display = 'none';
+                    (window as HTMLElement).style.display = 'none';
                 });
 
-                modal.style.display = "block";
+
+                modal!.style.display = "block";
                 document.body.style.overflow = "hidden";
                 document.body.style.marginRight = `${scroll}px`;
             });
         });
 
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 closeModal();
             }
         });
 
         const closeModal = () => {
-            modal.style.display = "none";
+            modal!.style.display = "none";
             document.body.style.overflow = "";
 
             windows.forEach(window => {
-                window.style.display = 'none';
+                (window as HTMLElement).style.display = 'none';
             });
         }
 
-        close.addEventListener('click', () => {
+        close!.addEventListener('click', () => {
             closeModal();
             document.body.style.marginRight = `0px`;
         });
 
-        modal.addEventListener('click', (e) => {
+        modal!.addEventListener('click', (e) => {
             if (e.target === modal && closeClickOverlay) {
                 closeModal();
                 document.body.style.marginRight = `0px`;
@@ -50,10 +59,22 @@ const modals = () => {
         });
     }
 
-    const showModalByTime = (selector, time) => {
+    const showModalByTime = (selector: string, time: number) => {
         setTimeout(() => {
-            document.querySelector(selector).style.display = 'block';
-            document.body.style.overflow = "hidden";
+            let display;
+
+            document.querySelectorAll<HTMLElement>('[data-modal]').forEach(item => {
+                if (getComputedStyle(item).display !== 'none') {
+                    display = "block";
+                }
+            });
+
+            if (!display) {
+                document.querySelector<HTMLElement>(selector)!.style.display = 'block';
+                document.body.style.overflow = "hidden";
+                const scroll = calcScroll();
+                document.body.style.marginRight = `${scroll}px`;
+            }
         }, time);
     }
 
@@ -73,32 +94,17 @@ const modals = () => {
     }
 
     triggers({
-        triggerSelector: '.popup_engineer_btn',
-        modalSelector: '.popup_engineer',
-        closeSelector:'.popup_engineer .popup_close'
+        triggerSelector: '.button-design',
+        modalSelector: '.popup-design',
+        closeSelector: '.popup-design .popup-close'
     });
     triggers({
-        triggerSelector: '.phone_link',
-        modalSelector: '.popup',
-        closeSelector:'.popup .popup_close'
+        triggerSelector: '.button-consultation',
+        modalSelector: '.popup-consultation',
+        closeSelector: '.popup-consultation .popup-close'
     });
-    triggers({
-        triggerSelector: '.popup_calc_btn',
-        modalSelector: '.popup_calc',
-        closeSelector: '.popup_calc_close'
-    });
-    triggers({
-        triggerSelector: '.popup_calc_button',
-        modalSelector: '.popup_calc_profile',
-        closeSelector: '.popup_calc_profile_close',
-        closeClickOverlay: false
-    });
-    triggers({
-        triggerSelector: '.popup_calc_profile_button',
-        modalSelector: '.popup_calc_end',
-        closeSelector: '.popup_calc_end_close',
-        closeClickOverlay: false
-    });
+
+    showModalByTime('.popup-consultation', 5000);
 };
 
 export default modals;
