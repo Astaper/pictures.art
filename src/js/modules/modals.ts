@@ -1,4 +1,4 @@
-interface ModalOptions {
+interface ModalOptions { 
     triggerSelector: string;
     modalSelector: string;
     closeSelector: string;
