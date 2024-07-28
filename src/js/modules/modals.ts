@@ -6,6 +6,14 @@ interface ModalOptions {
 }
 
 
+interface IModalOptions { 
+    triggerSelector: string;
+    modalSelector: string;
+    closeSelector: string;
+    closeClickOverlay?: boolean;
+}
+
+
 const modals = () => {
     btnPressed: false;
     const triggers = ({ triggerSelector, modalSelector, closeSelector, destroy = false }: ModalOptions) => {
@@ -16,6 +24,7 @@ const modals = () => {
         const scroll = calcScroll();
 
         trigger.forEach(trigger => {
+            trigger.addEventListener('click', (e: Event) => {
             trigger.addEventListener('click', (e: Event) => {
                 if (e.target) {
                     e.preventDefault();
@@ -41,6 +50,7 @@ const modals = () => {
             });
         });
 
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
         document.addEventListener('keydown', (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 closeModal();
@@ -79,6 +89,20 @@ const modals = () => {
 
     const showModalByTime = (selector: string, time: number) => {
         setTimeout(() => {
+            let display;
+
+            document.querySelectorAll<HTMLElement>('[data-modal]').forEach(item => {
+                if (getComputedStyle(item).display !== 'none') {
+                    display = "block";
+                }
+            });
+
+            if (!display) {
+                document.querySelector<HTMLElement>(selector)!.style.display = 'block';
+                document.body.style.overflow = "hidden";
+                const scroll = calcScroll();
+                document.body.style.marginRight = `${scroll}px`;
+            }
             let display;
 
             document.querySelectorAll<HTMLElement>('[data-modal]').forEach(item => {
