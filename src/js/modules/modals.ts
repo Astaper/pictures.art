@@ -1,4 +1,4 @@
-interface ModalOptions { 
+interface IModalOptions { 
     triggerSelector: string;
     modalSelector: string;
     closeSelector: string;
@@ -7,7 +7,7 @@ interface ModalOptions {
 
 
 const modals = () => {
-    const triggers = ({ triggerSelector, modalSelector, closeSelector, closeClickOverlay = true }: ModalOptions) => {
+    const triggers = ({ triggerSelector, modalSelector, closeSelector, closeClickOverlay = true }: IModalOptions) => {
         const trigger = document.querySelectorAll<HTMLElement>(triggerSelector);
         const modal = document.querySelector<HTMLElement>(modalSelector);
         const close = document.querySelector<HTMLElement>(closeSelector);
