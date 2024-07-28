@@ -24,7 +24,7 @@ const modals = () => {
                 btnPressed: true;
 
                 windows.forEach(window => {
-                    (window as HTMLElement).style.display = 'none';
+                    window.style.display = 'none';
                     window.classList.add('animated', 'fadeIn');
                 });
 
@@ -32,8 +32,10 @@ const modals = () => {
                     trigger.remove();
                 }
 
+                if (modal) {
+                    modal.style.display = "block";
+                }
 
-                modal!.style.display = "block";
                 document.body.style.overflow = "hidden";
                 document.body.style.marginRight = `${scroll}px`;
             });
@@ -50,7 +52,7 @@ const modals = () => {
             document.body.style.overflow = "";
 
             windows.forEach(window => {
-                (window as HTMLElement).style.display = 'none';
+                window.style.display = 'none';
             });
         }
 
@@ -101,16 +103,37 @@ const modals = () => {
         return scrollWidth;
     }
 
-    const openByScroll = (selector: string) => {
-        window.addEventListener('scroll', () => {
-            if (!btnPressed && (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight)) {
-                const element = document.querySelector(selector) as HTMLElement;
-                if (element) {
-                    element.click();
-                }
-            }
-        });
+    // const openByScroll = (selector: string) => {
+    //     window.addEventListener('scroll', () => {
+    //         if (!btnPressed && (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight)) {
+    //             const element = document.querySelector(selector) as HTMLElement;
+    //             if (element) {
+    //                 element.click();
+    //             }
+    //         }
+    //     });
 
+    // }
+
+    const endOfPageElement: HTMLElement | null = document.querySelector('.input-wrapper');
+
+    const fixedGiftElement: HTMLElement | null = document.querySelector('.fixed-gift');
+
+    const modalWindowElement: HTMLElement | null = document.querySelector('.popup-gift');
+
+    const observer: IntersectionObserver = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+
+        if (entries[0].isIntersecting) {
+            fixedGiftElement?.classList.add('hidden');
+            fixedGiftElement?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        }
+    }, {
+        rootMargin: '0px',
+        threshold: 1.0,
+    });
+
+    if (endOfPageElement) {
+        observer.observe(endOfPageElement);
     }
 
     triggers({
@@ -129,7 +152,7 @@ const modals = () => {
         closeSelector: '.popup-gift .popup-close',
         destroy: true
     });
-    openByScroll('.fixed-gift');
+    // openByScroll('.fixed-gift');
 
 
     showModalByTime('.popup-consultation', 5000);
