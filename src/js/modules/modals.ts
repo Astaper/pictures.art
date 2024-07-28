@@ -7,7 +7,7 @@ interface ModalOptions {
 
 
 const modals = () => {
-    const btnPressed = false;
+    btnPressed: false;
     const triggers = ({ triggerSelector, modalSelector, closeSelector, destroy = false }: ModalOptions) => {
         const trigger = document.querySelectorAll<HTMLElement>(triggerSelector);
         const modal = document.querySelector<HTMLElement>(modalSelector);
@@ -48,25 +48,33 @@ const modals = () => {
         });
 
         const closeModal = () => {
-            modal!.style.display = "none";
-            document.body.style.overflow = "";
+            if (modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "";
+            }
 
             windows.forEach(window => {
                 window.style.display = 'none';
             });
         }
 
-        close!.addEventListener('click', () => {
-            closeModal();
-            document.body.style.marginRight = `0px`;
-        });
-
-        modal!.addEventListener('click', (e) => {
-            if (e.target === modal) {
+        if (close) {
+            close.addEventListener('click', () => {
                 closeModal();
                 document.body.style.marginRight = `0px`;
-            }
-        });
+            });
+        }
+
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                    document.body.style.marginRight = `0px`;
+                }
+            });
+        }
+
+
     }
 
     const showModalByTime = (selector: string, time: number) => {
@@ -103,23 +111,9 @@ const modals = () => {
         return scrollWidth;
     }
 
-    // const openByScroll = (selector: string) => {
-    //     window.addEventListener('scroll', () => {
-    //         if (!btnPressed && (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight)) {
-    //             const element = document.querySelector(selector) as HTMLElement;
-    //             if (element) {
-    //                 element.click();
-    //             }
-    //         }
-    //     });
-
-    // }
-
     const endOfPageElement: HTMLElement | null = document.querySelector('.input-wrapper');
 
     const fixedGiftElement: HTMLElement | null = document.querySelector('.fixed-gift');
-
-    const modalWindowElement: HTMLElement | null = document.querySelector('.popup-gift');
 
     const observer: IntersectionObserver = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
 
@@ -152,7 +146,6 @@ const modals = () => {
         closeSelector: '.popup-gift .popup-close',
         destroy: true
     });
-    // openByScroll('.fixed-gift');
 
 
     showModalByTime('.popup-consultation', 5000);
