@@ -11,7 +11,6 @@ const sliders = ({ slides, dir, prev, next }: ISlidesOptions) => {
     let intervalId: number;
     const slide = document.querySelectorAll<HTMLElement>(slides);
 
-
     const showSlides = (n: any) => {
         if (n > slide.length) {
             slideIndex = 1;
