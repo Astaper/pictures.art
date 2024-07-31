@@ -7,8 +7,7 @@ interface ISlidesOptions {
 
 const sliders = ({ slides, dir, prev, next }: ISlidesOptions) => {
     let slideIndex = 1;
-    let paused = false;
-    let intervalId: number;
+    let pausedId: number;
     const slide = document.querySelectorAll<HTMLElement>(slides);
 
     const showSlides = (n: any) => {
@@ -53,26 +52,23 @@ const sliders = ({ slides, dir, prev, next }: ISlidesOptions) => {
 
     const activateAnimation = () => {
         if (dir === 'vertical') {
-            intervalId = setInterval(function () {
+            pausedId = setInterval(function () {
                 plusSlides(1);
                 slide[slideIndex - 1].classList.add('slideInDown');
             }, 3000);
         } else {
-            intervalId = setInterval(function () {
+            pausedId = setInterval(function () {
                 plusSlides(1);
                 slide[slideIndex - 1].classList.remove('slideInRight');
                 slide[slideIndex - 1].classList.add('slideInLeft');
             }, 3000);
         }
-        paused = false;
     }
 
     activateAnimation();
 
-
     slide[0].parentNode?.addEventListener('mouseenter', () => {
-        clearInterval(intervalId);
-        paused = true;
+        clearInterval(pausedId);
     });
     slide[0].parentNode?.addEventListener('mouseleave', () => {
         activateAnimation();
