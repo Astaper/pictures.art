@@ -8,9 +8,9 @@ interface ISlidesOptions {
 const sliders = ({ slides, dir, prev, next }: ISlidesOptions) => {
     let slideIndex = 1;
     let pausedId: number;
-    const slide = document.querySelectorAll<HTMLElement>(slides);
+    const slide: NodeListOf<HTMLElement> = document.querySelectorAll(slides);
 
-    const showSlides = (n: any) => {
+    const showSlides = (n: number) => {
         if (n > slide.length) {
             slideIndex = 1;
         }
@@ -29,7 +29,7 @@ const sliders = ({ slides, dir, prev, next }: ISlidesOptions) => {
 
     showSlides(slideIndex);
 
-    const plusSlides = (n: any) => {
+    const plusSlides = (n: number) => {
         showSlides(slideIndex += n);
     }
 
