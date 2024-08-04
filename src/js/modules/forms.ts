@@ -1,19 +1,26 @@
-import checkNumInputs from "./checkNumInputs";
+// import checkNumInputs from "./checkNumInputs";
 
-const forms = (state) => {
+const forms = () => {
     const form = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
 
-    checkNumInputs('input[name="user_phone"]');
+    // checkNumInputs('input[name="user_phone"]');
 
     const message = {
         loading: 'Загрузка...',
         succes: 'Спасибо! Скоро мы с вами свяжемся',
-        failure: 'Что-то пошло не так...'
+        failure: 'Что-то пошло не так...',
+        spinner: 'aseets/img/spinner.gif',
+        ok: 'aseets/img/ok.png',
+        fail: 'aseets/img/fail.png',
     };
 
-    const postData = async (url, data) => {
-        document.querySelector('.status').textContent = message.loading;
+    // const path = {
+    //     designer: 'assets/server.php',
+    //     question: 'assets/'
+    // }
+
+    const postData = async (url: string, data: any) => {
         const res = await fetch(url, {
             method: "POST",
             headers: {
@@ -31,10 +38,10 @@ const forms = (state) => {
         });
     };
 
-    const hideForm = () => {
-        document.querySelector('.popup_calc_end').style.display = 'none';
-        document.body.style.overflow = "";
-    };
+    // const hideForm = () => {
+    //     document.querySelector('.popup_calc_end').style.display = 'none';
+    //     document.body.style.overflow = "";
+    // };
 
     form.forEach(form => {
         form.addEventListener('submit', (e) => {
@@ -42,33 +49,49 @@ const forms = (state) => {
 
             const statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
-            form.appendChild(statusMessage);
+            form.parentNode?.appendChild(statusMessage);
+
+            form.classList.add('animated', 'fadeOutUp');
+            setTimeout(() => {
+                form.style.display = 'none';
+            }, 400);
+
+            let statusImg = document.createElement('img');
+            statusImg.setAttribute('src', message.spinner);
+            statusImg.classList.add('animated', 'fadeInUp');
+            statusMessage.appendChild(statusImg);
+
+            let textMessage = document.createElement('div');
+            textMessage.textContent = message.loading;
+            statusMessage.appendChild(textMessage);
 
             const formData = new FormData(form);
-            if (form.getAttribute('data-calc') === "end") {
-                for (let key in state) {
-                    formData.append(key, state[key]);
-                }
-            }
+            // let api;
+            // form.closest('.popup-design') ? api = path.designer : api = path.question;
+            // console.log(api);
 
-            const data = {};
+            const data: {[key: string]: any} = {};
             formData.forEach((value, key) => {
                 data[key] = value;
             });
 
             postData('https://local-qpbb.onrender.com/api/data', data)
                 .then(res => {
-                    statusMessage.textContent = message.succes;
+                    statusImg.setAttribute('src', message.ok);
+                    textMessage.textContent = message.succes;
                 })
-                .catch(() => statusMessage.textContent = message.failure)
+                .catch(() => {
+                    statusImg.setAttribute('src', message.fail);
+                    textMessage.textContent = message.failure;
+                })
                 .finally(() => {
                     clearInputs();
-                    setTimeout(() => {
-                        statusMessage.remove();
-                        if (form.getAttribute('data-calc') === "end") {
-                            hideForm();
-                        }
-                    }, 4000);
+                    // setTimeout(() => {
+                    //     statusMessage.remove();
+                    //     if (form.getAttribute('data-calc') === "end") {
+                    //         hideForm();
+                    //     }
+                    // }, 4000);
                 });
         });
     });
