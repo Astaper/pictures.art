@@ -10,9 +10,12 @@ const forms = () => {
         loading: 'Загрузка...',
         succes: 'Спасибо! Скоро мы с вами свяжемся',
         failure: 'Что-то пошло не так...',
-        spinner: '/src/assets/img/spinner.gif',
-        ok: '/src/assets/img/ok.png',
-        fail: '/src/assets/img/fail.png',
+        // spinner: '/src/assets/img/spinner.gif',
+        // ok: '/src/assets/img/ok.png',
+        // fail: '/src/assets/img/fail.png',
+        spinner: '/assets/spinner.gif',
+        ok: '/assets/ok.png',
+        fail: '/assets/fail.png',
     };
 
     // const path = {
