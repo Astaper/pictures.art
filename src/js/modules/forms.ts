@@ -10,9 +10,9 @@ const forms = () => {
         loading: 'Загрузка...',
         succes: 'Спасибо! Скоро мы с вами свяжемся',
         failure: 'Что-то пошло не так...',
-        spinner: 'aseets/img/spinner.gif',
-        ok: 'aseets/img/ok.png',
-        fail: 'aseets/img/fail.png',
+        spinner: '/src/assets/img/spinner.gif',
+        ok: '/src/assets/img/ok.png',
+        fail: '/src/assets/img/fail.png',
     };
 
     // const path = {
@@ -86,12 +86,12 @@ const forms = () => {
                 })
                 .finally(() => {
                     clearInputs();
-                    // setTimeout(() => {
-                    //     statusMessage.remove();
-                    //     if (form.getAttribute('data-calc') === "end") {
-                    //         hideForm();
-                    //     }
-                    // }, 4000);
+                    setTimeout(() => {
+                        statusMessage.remove();
+                        form.style.display = 'block';
+                        form.classList.remove('fadeOutUp');
+                        form.classList.add('fadeInUp');
+                    }, 4000);
                 });
         });
     });
