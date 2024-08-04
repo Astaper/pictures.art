@@ -13,9 +13,9 @@ const forms = () => {
         // spinner: '/src/assets/img/spinner.gif',
         // ok: '/src/assets/img/ok.png',
         // fail: '/src/assets/img/fail.png',
-        spinner: '/assets/spinner.gif',
-        ok: '/assets/ok.png',
-        fail: '/assets/fail.png',
+        spinner: '/assets/images/spinner.gif',
+        ok: '/assets/images/ok.png',
+        fail: '/assets/images/fail.png',
     };
 
     // const path = {
