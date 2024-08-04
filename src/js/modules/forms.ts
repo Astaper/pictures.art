@@ -20,7 +20,7 @@ const forms = () => {
     //     question: 'assets/'
     // }
 
-    const postData = async (url: string, data: any) => {
+    const postData = async (url: string, data: { [key: string]: string }) => {
         const res = await fetch(url, {
             method: "POST",
             headers: {
@@ -70,9 +70,12 @@ const forms = () => {
             // form.closest('.popup-design') ? api = path.designer : api = path.question;
             // console.log(api);
 
-            const data: {[key: string]: any} = {};
+            const data: { [key: string]: string } = {};
             formData.forEach((value, key) => {
-                data[key] = value;
+                // data[key] = value;
+                if (typeof value === 'string') {
+                    data[key] = value;
+                }
             });
 
             postData('https://local-qpbb.onrender.com/api/data', data)
