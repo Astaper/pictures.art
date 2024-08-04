@@ -76,7 +76,7 @@ const forms = () => {
             });
 
             postData('https://local-qpbb.onrender.com/api/data', data)
-                .then(res => {
+                .then(() => {
                     statusImg.setAttribute('src', message.ok);
                     textMessage.textContent = message.succes;
                 })
