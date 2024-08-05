@@ -1,10 +1,7 @@
-// import checkNumInputs from "./checkNumInputs";
-
 const forms = () => {
     const form = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
-
-    // checkNumInputs('input[name="user_phone"]');
+    const upload = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
 
     const message = {
         loading: 'Загрузка...',
@@ -15,11 +12,6 @@ const forms = () => {
         fail: '/images/fail.png',
     };
 
-    // const path = {
-    //     designer: 'assets/server.php',
-    //     question: 'assets/'
-    // }
-
     const postData = async (url: string, data: { [key: string]: string }) => {
         const res = await fetch(url, {
             method: "POST",
@@ -28,7 +20,6 @@ const forms = () => {
             },
             body: JSON.stringify(data)
         });
-
         return await res.text();
     };
 
@@ -36,12 +27,27 @@ const forms = () => {
         inputs.forEach(input => {
             input.value = '';
         });
+        upload.forEach(item => {
+            if (item.previousElementSibling) {
+                item.previousElementSibling.textContent = "Файл не выбран";
+            }
+        });
     };
 
-    // const hideForm = () => {
-    //     document.querySelector('.popup_calc_end').style.display = 'none';
-    //     document.body.style.overflow = "";
-    // };
+    upload.forEach(item => {
+        item.addEventListener('input', () => {
+            if (item.files && item.files[0]) {
+                console.log(item.files[0]);
+                let dots: string;
+                const arr = item.files[0].name.split('.');
+                arr[0].length > 6 ? dots = "..." : dots = '.';
+                const name = arr[0].substring(0, 6) + dots + arr[1];
+                if (item.previousElementSibling) {
+                    item.previousElementSibling.textContent = name;
+                }
+            }
+        });
+    });
 
     form.forEach(form => {
         form.addEventListener('submit', (e) => {
@@ -56,23 +62,19 @@ const forms = () => {
                 form.style.display = 'none';
             }, 400);
 
-            let statusImg = document.createElement('img');
+            const statusImg = document.createElement('img');
             statusImg.setAttribute('src', message.spinner);
             statusImg.classList.add('animated', 'fadeInUp');
             statusMessage.appendChild(statusImg);
 
-            let textMessage = document.createElement('div');
+            const textMessage = document.createElement('div');
             textMessage.textContent = message.loading;
             statusMessage.appendChild(textMessage);
 
             const formData = new FormData(form);
-            // let api;
-            // form.closest('.popup-design') ? api = path.designer : api = path.question;
-            // console.log(api);
 
             const data: { [key: string]: string } = {};
             formData.forEach((value, key) => {
-                // data[key] = value;
                 if (typeof value === 'string') {
                     data[key] = value;
                 }
