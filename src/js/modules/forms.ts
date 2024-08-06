@@ -80,6 +80,12 @@ const forms = () => {
                 }
             });
 
+            upload.forEach(item => {
+                if (item.files && item.files[0]) {
+                    data[item.name] = item.files[0].name;
+                }
+            });
+
             postData('https://local-qpbb.onrender.com/api/data', data)
                 .then(() => {
                     statusImg.setAttribute('src', message.ok);
