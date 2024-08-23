@@ -41,7 +41,7 @@ const showMoreStyles = (trigger: string, wrapper: string) => {
 
             card.innerHTML = `
             <div class="styles-block">
-                <img src=${item.src}alt="style" >
+                <img src=${item.src} alt="style" >
                 <h4>${item.title}</h4>
                 <a href=${item.link}>Подробнее</a>
               </div>
@@ -51,14 +51,6 @@ const showMoreStyles = (trigger: string, wrapper: string) => {
             document.querySelector(wrapper)?.appendChild(card);
         });
     };
-
-    // <div class="hidden-lg hidden-md hidden-sm hidden-xs styles-2" >
-    //     <div class=styles - block >
-    //         <img src=./src/assets / img / styles - 5.jpg alt >
-    //             <h4>Пастелью </h4>
-    //             < a href = "#" > Подробнее </>
-    //                 </div>
-    //                 </div>
 };
 
 export default showMoreStyles;
