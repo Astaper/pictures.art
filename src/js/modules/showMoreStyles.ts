@@ -21,7 +21,7 @@ const showMoreStyles = (trigger: string, wrapper: string) => {
     // })
 
     btn?.addEventListener('click', function (this: HTMLElement) {
-        getResource('assets/db.json')
+        getResource('db.json')
             .then(res => createCards(res.styles))
             .catch(error => console.log(error));
         this.remove();
