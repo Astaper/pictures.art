@@ -20,11 +20,11 @@ const showMoreStyles = (trigger: string, wrapper: string) => {
     //     btn.remove();
     // })
 
-    btn?.addEventListener('click', function (this: HTMLElement) {
-        getResource('db.json')
+    btn?.addEventListener('click', async function (this: HTMLElement) {
+         await getResource('db.json')
             .then(res => createCards(res.styles))
             .catch(error => console.log(error));
-        this.remove();
+         this.remove();
     });
 
     interface StyleItem {
