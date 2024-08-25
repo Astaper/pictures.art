@@ -13,17 +13,16 @@ const calc = ({ size, material, options, promocode, result }: IcalcOptions) => {
     const promocodeBlock: HTMLInputElement | null = document.querySelector(promocode);
     const resultBlock: HTMLElement | null = document.querySelector(result);
 
-
-
     const calcFunc = () => {
 
         const sum = Math.round((+sizeBlock!.value) * (+materilBlock!.value) + (+optionsBlock!.value));
 
-        if (sizeBlock?.value == '' || materilBlock?.value == '') {
-            if (resultBlock) {
-                resultBlock.textContent = "Пожалуйста, выберите размер и материал картины";
-            }
-        } else if (promocodeBlock?.value === 'IWANTPOPART') {
+        if (isNaN(sum) || !sizeBlock!.value || !materilBlock!.value) {
+            resultBlock!.textContent = "Пожалуйста, выберите размер и материал картины";
+            return;
+        }
+
+        else if (promocodeBlock?.value === 'IWANTPOPART') {
             if (resultBlock) {
                 resultBlock.textContent = Math.round((sum * 0.7)).toString();
             }
