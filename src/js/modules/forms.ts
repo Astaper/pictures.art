@@ -1,3 +1,5 @@
+import { postData } from "../services/requests";
+
 const forms = () => {
     const form = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
@@ -10,17 +12,6 @@ const forms = () => {
         spinner: '/images/spinner.gif',
         ok: '/images/ok.png',
         fail: '/images/fail.png',
-    };
-
-    const postData = async (url: string, data: { [key: string]: string }) => {
-        const res = await fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        return await res.text();
     };
 
     const clearInputs = () => {
