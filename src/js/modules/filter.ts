@@ -8,6 +8,7 @@ const filter = () => {
     const btnGuy = document.querySelector('.guy') as HTMLElement;
     const btnGrandmother = document.querySelector('.grandmother') as HTMLElement;
     const btnGranddad = document.querySelector('.granddad') as HTMLElement;
+    const wrapper = document.querySelector('.portfolio-wrapper') as HTMLElement;;
     const markAll = document.querySelectorAll('.all') as NodeListOf<HTMLElement>;
     const markGirl = document.querySelectorAll('.girl') as NodeListOf<HTMLElement>;
     const markLovers = document.querySelectorAll('.lovers') as NodeListOf<HTMLElement>;
@@ -16,10 +17,12 @@ const filter = () => {
     const no = document.querySelector('.portfolio-no') as HTMLElement;
 
     const typeFilter = (markType: NodeListOf<HTMLElement> | null) => {
-        markAll.forEach(mark => {
-            mark.style.display = 'none';
-            mark.classList.remove('animated', 'fadeIn');
-        });
+        if (wrapper) {
+            Array.from(wrapper.children).forEach((mark: Element) => {
+                (mark as HTMLElement).style.display = 'none';
+                (mark as HTMLElement).classList.remove('animated', 'fadeIn');
+            });
+          }
 
         if (no) {
             no.style.display = 'none';
