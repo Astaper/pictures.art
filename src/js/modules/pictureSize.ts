@@ -4,7 +4,7 @@ const pictureSize = (imgSelector: string) => {
     const showImg = (block: HTMLElement) => {
         const img = block.querySelector('img') as HTMLImageElement | null;
         if (img) {
-            img.src = img.src.slice(0, -4) + '-1.png';
+            img.src = img.src.replace('.png', '-1.png');
             block.querySelectorAll('p:not(.sizes-hit)').forEach(p => (p as HTMLElement).style.display = 'none');
         }
     }
@@ -12,7 +12,7 @@ const pictureSize = (imgSelector: string) => {
     const hideImg = (block: HTMLElement) => {
         const img = block.querySelector('img') as HTMLImageElement | null;
         if (img) {
-            img.src = img.src.slice(0, -6) + '.png';
+            img.src = img.src.replace('-1.png', '.png');
             block.querySelectorAll('p:not(.sizes-hit)').forEach(p => (p as HTMLElement).style.display = 'block');
         }
     }
