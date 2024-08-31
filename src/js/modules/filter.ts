@@ -1,6 +1,6 @@
 const filter = () => {
     const menu = document.querySelector('.portfolio-menu') as HTMLElement;
-    const items = document.querySelectorAll('.li') as NodeListOf<HTMLElement>;
+    const items = document.querySelectorAll('li') as NodeListOf<HTMLElement>;
     const btnAll = document.querySelector('.all') as HTMLElement;
     const btnLovers = document.querySelector('.lovers') as HTMLElement;
     const btnChef = document.querySelector('.chef') as HTMLElement;
