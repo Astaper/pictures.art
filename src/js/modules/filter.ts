@@ -22,7 +22,7 @@ const filter = () => {
                 (mark as HTMLElement).style.display = 'none';
                 (mark as HTMLElement).classList.remove('animated', 'fadeIn');
             });
-          }
+        }
 
         if (no) {
             no.style.display = 'none';
@@ -40,7 +40,7 @@ const filter = () => {
         }
 
     };
-    
+
 
     btnAll?.addEventListener('click', () => {
         typeFilter(markAll);
@@ -70,7 +70,7 @@ const filter = () => {
 
         if (target && target.tagName === 'LI')
             items.forEach(btn => btn.classList.remove('active'));
-            target.classList.add('active');
+        target.classList.add('active');
     });
 };
 
