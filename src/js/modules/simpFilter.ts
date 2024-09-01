@@ -8,29 +8,13 @@ const simpFilter = () => {
             menuItems.forEach(item => item.classList.remove('active'));
             menuItem.classList.add('active');
 
-            const filter = menuItem.getAttribute('data-id');
+            const id = (menuItem as HTMLElement).dataset.id;
 
-            let filteredItems;
+            const filteredItems = portfolioItems.filter(item => (item as HTMLElement).dataset.id?.includes(id || ''));
 
-            if (filter === 'all') {
-                filteredItems = portfolioItems;
-            } else {
-                filteredItems = portfolioItems.filter(item => item.getAttribute('data-id').includes(filter));
-            }
-
-            portfolioItems.forEach(item => {
-                if (filteredItems.includes(item)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-
-            if (filteredItems.length === 0) {
-                noItemsMessage.style.display = 'block';
-            } else {
-                noItemsMessage.style.display = 'none';
-            }
+            portfolioItems.forEach(item => (item as HTMLElement).style.display = 'none');
+            (noItemsMessage as HTMLElement).style.display = filteredItems.length ? 'none' : 'block';
+            filteredItems.forEach(item => (item as HTMLElement).style.display = 'block');
         });
     });
 }
