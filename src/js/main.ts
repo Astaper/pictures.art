@@ -6,6 +6,7 @@ import checkTextInputs from "./modules/checkTextInputs";
 import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
 import filter from "./modules/filter";
+import accordion from "./modules/accordion";
 
 window.addEventListener('DOMContentLoaded', () => {
     modals();
@@ -36,4 +37,5 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     showMoreStyles('.button-styles', '#styles .row');
     filter();
+    accordion('.accordion-heading');
 });
