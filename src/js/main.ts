@@ -6,6 +6,7 @@ import checkTextInputs from "./modules/checkTextInputs";
 import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
 import pictureSize from "./modules/pictureSize";
+import filter from "./modules/filter";
 
 window.addEventListener('DOMContentLoaded', () => {
     modals();
@@ -36,4 +37,5 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     showMoreStyles('.button-styles', '#styles .row');
     pictureSize('.sizes-block');
+    filter();
 });
