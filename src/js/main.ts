@@ -7,6 +7,7 @@ import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
 import pictureSize from "./modules/pictureSize";
 import filter from "./modules/filter";
+import accordion from "./modules/accordion";
 
 window.addEventListener('DOMContentLoaded', () => {
     modals();
@@ -38,4 +39,5 @@ window.addEventListener('DOMContentLoaded', () => {
     showMoreStyles('.button-styles', '#styles .row');
     pictureSize('.sizes-block');
     filter();
+    accordion('.accordion-heading');
 });
