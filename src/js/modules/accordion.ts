@@ -17,6 +17,8 @@ const accordion = (triggersSelector: string) => {
         });
     });
 
+
+
     // const blocks = document.querySelectorAll(itemsSelector);
 
     // blocks.forEach(block => {
