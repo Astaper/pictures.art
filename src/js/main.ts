@@ -5,6 +5,7 @@ import mask from "./modules/mask";
 import checkTextInputs from "./modules/checkTextInputs";
 import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
+import simpFilter from "./modules/simpFilter";
 import pictureSize from "./modules/pictureSize";
 import filter from "./modules/filter";
 import accordion from "./modules/accordion";
@@ -37,7 +38,10 @@ window.addEventListener('DOMContentLoaded', () => {
         result: '.calc-price'
     });
     showMoreStyles('.button-styles', '#styles .row');
+    simpFilter();
     pictureSize('.sizes-block');
     filter();
     accordion('.accordion-heading');
 });
+
+
