@@ -6,8 +6,10 @@ const burger = (menuSelector: string, burgerSelector: string) => {
         menuElem.style.display = 'none';
     }
 
+    const breakpoint: number = 993
+
     burgerElem?.addEventListener('click', () => {
-        if (menuElem?.style.display == "none" && window.screen.availWidth < 993) {
+        if (menuElem?.style.display == "none" && window.screen.availWidth <= breakpoint) {
             menuElem.style.display = 'block';
         } else {
             if (menuElem) {
@@ -17,7 +19,7 @@ const burger = (menuSelector: string, burgerSelector: string) => {
     });
 
     window.addEventListener('resize', () => {
-        if (window.screen.availWidth > 992) {
+        if (window.screen.availWidth > breakpoint) {
             if (menuElem) {
                 menuElem.style.display = 'none';
             }
