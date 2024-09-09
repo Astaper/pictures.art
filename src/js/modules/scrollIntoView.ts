@@ -1,5 +1,6 @@
 const scrollInto = (upSelector: string) => {
     const upElem = document.querySelector(upSelector);
+    const btnScroll = document.querySelector('.pageup');
 
     window.addEventListener('scroll', () => {
         if (document.documentElement.scrollTop > 1650) {
@@ -11,9 +12,11 @@ const scrollInto = (upSelector: string) => {
         }
     });
 
-    document.querySelector('.pageup')?.addEventListener('click', function () {
+    btnScroll?.addEventListener('click', () => {
         const targetElement = document.querySelector('.header');
-        targetElement!.scrollIntoView({ behavior: 'smooth' });
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 }
 
