@@ -1,5 +1,6 @@
 const scrollInto = (upSelector: string) => {
     const upElem = document.querySelector(upSelector);
+
     window.addEventListener('scroll', () => {
         if (document.documentElement.scrollTop > 1650) {
             upElem?.classList.add('animated', 'fadeIn');
