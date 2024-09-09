@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
     filter();
     accordion('.accordion-heading');
     burger('.burger-menu', '.burger');
-    scrolling();
+    scrolling('.pageup');
 });
 
 
